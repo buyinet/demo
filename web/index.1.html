@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body{
+				margin: 0;
+			}
+			
+			.small_page{
+				position: relative;
+				width:100%;
+				height: 100%;
+			}
+			
+			#index-title{
+				display: inline-block;
+				width:10rem;
+				margin-left: 3rem;
+				border-radius: 1rem;
+				box-sizing: border-box;
+				border: .4rem solid cadetblue;
+				box-shadow: 0 0 .2rem #5F9EA0;
+				font-size: 1.2rem;
+				text-align: center;
+				font-weight: bold;
+				background-color: #fff;
+				padding: .2rem;
+				color:cadetblue;
+				text-shadow: 0 .1rem .1rem cadetblue;
+				background-color: rgba(255,255,255,.5);
+			}
+			
+			#index-logo{
+				width:4rem;
+				margin-left:6rem;
+				animation: index_logo_rotate 4s infinite;
+			}
+			
+			.center{
+				position: absolute;
+				margin-top: 50%;
+			}
+			
+			.left{
+					position: absolute;
+					width:50%;
+					height:100%;
+					left:0;
+					background-color: aquamarine;
+			}
+			
+			.right{
+					position: absolute;
+					width:50%;
+					height:100%;
+					right:0;
+					background-color: #fff;				
+			}
+			@keyframes index_logo_rotate{
+				from{transform: rotateY(0deg)}
+				to{transform: rotateY(360deg);}
+			}
+			
+			.slide_prompt{
+				position: absolute;
+				margin: 0;
+				font-size: 1.2rem;
+				height: 1.5rem;
+				line-height: 1.5rem;
+				transform: rotate(90deg);
+				color:gray;
+				color:#fff;
+				right: 2rem;
+				bottom:0;
+				padding: .3rem;
+				border-radius: 1rem 0 0 1rem;
+				background-color: aquamarine;
+				font-weight: bold;
+				box-shadow: 0 0rem 1rem #7FFFD4;
+			}
+			.slide_prompt:hover{
+				box-shadow: 0 0rem .5rem #7FFFD4;
+			}
+			#start-page{
+				box-shadow: 0 0 2rem aquamarine;
+				z-index: 1;
+			}
+			
+			#index-page{
+				top:0;
+				z-index: 0;
+			}
+			.pao{
+				position: relative;
+				display: inline-block;
+				height:5rem;
+				width:5rem;
+				font-size: 1rem;
+				background-color: rgba(255,255,255,0.5);
+				box-shadow: 0 0 2rem rgba(127,255,212,0.5) inset,.1rem .1rem 1rem rgba(127,255,212,0.5) ;
+				border-radius: 3rem;
+				margin-top: 1rem;
+			}
+			.pao>span{
+				position: absolute;
+				top:50%;
+				left:50%;
+				font-size:70%;
+				transform: translate(-50%,-50%);
+				margin: 0;
+				text-align: center;
+				font-weight: bold;
+				color:gray;
+			}
+			.pao>img{
+				position: relative;
+				width: 3rem;
+				height:3rem;
+				top:1rem;
+				left:1rem;
+				opacity: .8;
+				
+			}
+		</style>
+	</head>
+	<body>
+ 		<div class="small_page" id="start-page">
+			<div class="left"></div>
+			<div class="right"></div>
+			<div class="center">
+				<img src="images/bygo_logo.png" id="index-logo">
+				<p id="index-title">不一网络科技社</p>
+			</div>
+			<p class="slide_prompt">&lt;&lt;</p>
+		</div>
+		
+		<div style="position: fixed;" class="small_page" id="index-page">
+			<div class="pao"><img src="images/wechat_apple.png"/></div>
+			<div class="pao"><span>网页设计</span></div>
+			<div class="pao"><span>网站运维</span></div>
+			<div class="pao"><span>UI设计</span></div>
+			<div class="pao"><span>美工制图</span></div>
+			<div class="pao"><span>后端开发</span></div>
+			<div class="pao"><span>公众号<br>运维</span></div>
+		</div>
+		<div class="small_page page-z"></div>
+		
+		<script src="js/jquery.bygo.js"></script>
+		<script>
+			$("#start-page").css("height",innerHeight+"px");
+			$(".page-z").css("height",innerHeight+"px");
+	
+	
+	function upward(){
+		var y=$(document).scrollTop();
+		var inter=setInterval(function(){
+			if(y>innerHeight/2){
+				y+=10;
+				$(document).scrollTop(y);
+				console.log(123);
+			}
+		},10)
+		setTimeout(function(){clearInterval(inter)},innerHeight/2/10*10)
+	}
+	
+	
+	function downward(){
+		var y=$(document).scrollTop();
+		var inter=setInterval(function(){
+			if(y>0){
+				y-=10;
+				$(document).scrollTop(y);
+				console.log(345);
+			}
+		},10)
+		setTimeout(function(){clearInterval(inter)},innerHeight/2/10*10)
+	}
+	
+	//手指离开屏幕
+    document.addEventListener("touchend", function(e) {
+		if(innerHeight/2>$(document).scrollTop())
+			downward();
+		else
+			upward();
+    }, false);
+	
+		</script>
+	</body>
+</html>
